@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PC Doctor</title>
+
+        <link rel="stylesheet" href="style.css">
+
+        <!-- Подключение шрифта на страницу -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Хэдер страницы -->
+        <header class="header">
+            <div class="header__inner container">
+                <div class="header__logo">
+                    <h1 class="header__logo-text">PC DOCTOR</h1>
+                </div>
+                
+                <!-- Кнопка "Корзина" -->
+                <div class="header__cart">
+                    <a href="" class="button button__cart">
+                        <img src="img/cart.svg" alt="Корзина" width="25px" height="25px">
+                        <span>Корзина</span>
+                    </a>
+                    
+                    <!-- Корзина -->
+                    <div class="show-menu visible-none header__cart">
+
+                        <div class="cart-menu-title">
+                            <h2 class="cart-title">Товары</h2>
+                            <a href="" class="cart-clear-button">Очистить</a>
+                        </div>
+        
+                        <div class="cart-menu">
+                            <div class="cart-list">
+
+                                <!-- Список элементов в корзине -->
+                                <ul class="cart-menu-list">
+                                    <li class="cart-menu-item">
+                                        <div class="cart-item-product">
+                                            <img src="img/services/1.png" alt="" width="60px" height="60px">
+                                            <div class="cart-item-desc">
+                                                <h3 class="cart-item-name">-</h3>
+                                                <h3 class="cart-item-price">-</h3>
+                                            </div>
+                                        </div>
+        
+                                        <div class="cart-item-controls">
+                                            <a href="" class="decrease-cart-item cart-item-button">-</a>
+                                            <span class="cart-item-count">1</span>
+                                            <a href="" class="increase-cart-item cart-item-button">+</a>
+                                        </div>
+                                    </li>
+                                </ul>
+        
+                                <h3 class="cart-price">Общая цена: 0 руб.</h3>
+                            </div>
+                            <div class="cart-payment">
+                                <form class="cart-form">
+                                    <h4 class="cart-form-name">Имя и фамилия</h4>
+                                    <input type="firstname" minlength="4" class="cart-form-input" placeholder="Например: Александр Иванов" required>
+                                    <h4 class="cart-form-name">Адрес</h4>
+                                    <input type="text" minlength="10" class="cart-form-input" placeholder="Например: г. Санкт-Петерсбург, ул. Невского" required>
+                                    <h4 class="cart-form-name">Номер телефона</h4>
+                                    <input type="tel" pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" class="cart-form-input" placeholder="" required>
+                                </form>
+                                <button type="submit" class="cart-pay-button">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+
+                        <!-- Шаблон для добавления услуги -->
+                         <template id="service-item">
+                            <div class="services__item">
+                                <img src="" alt="" width="340px" class="services__item-image">
+                                <div class="services__item-inner">
+                                    <h2 class="services__item-name"></h2>
+                                    <p class="services__item-desc"></p>
+                                    <div class="services__item-payment">
+                                        <div class="services__item-payment-left">
+                                            <h3 class="services__item-price"></h3>
+                                            <h4 class="services__item-price_desc">Требуется предоплата</h4>
+                                        </div>
+
+                                        <button type="button" class="services__item-cart">
+                                            <img src="img/cart.svg" alt="Добавить в корзину">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                         </template>
+
+                        <!-- Шаблон для добавления товара в корзину -->
+                        <template id="product">
+                            <li class="cart-menu-item">
+                                <div class="cart-item-product">
+                                    <img src="img/services/1.png" alt="" width="60px" height="60px">
+                                    <div class="cart-item-desc">
+                                        <h3 class="cart-item-name">-</h3>
+                                        <h3 class="cart-item-price">-</h3>
+                                    </div>
+                                </div>
+
+                                <div class="cart-item-controls">
+                                    <a href="" class="decrease-cart-item cart-item-button">-</a>
+                                    <span class="cart-item-count">1</span>
+                                    <a href="" class="increase-cart-item cart-item-button">+</a>
+                                </div>
+                            </li>
+                        </template>
+                        
+        </header>
+        
+        <!-- Основной контент страницы -->
+        <main class="main ">
+
+            <!-- Баннер -->
+            <section class="banner">
+                <div class="banner__inner container">
+                    <div class="banner__description">
+                        <h1 class="banner__description-title">Сделаю ваш компьютер</h1>
+                        <ul class="banner__description-list">
+                            <li class="banner__description-item">Выезд мастера в день заказа</li>
+                            <li class="banner__description-item">Работаем более 8 лет</li>
+                            <li class="banner__description-item">Решение любых проблем</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Список услуг -->
+            <section class="services">
+                <div class="services__inner container">
+                    <h1 class="services__title">Список услуг</h1>
+
+                    <div class="services__list">
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Футер страницы -->
+        <footer class="footer">
+            <div class="footer__inner container">
+                
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+
+</html>
