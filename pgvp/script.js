@@ -77,7 +77,7 @@ function addToCartFunction(serviceItem, product) {
                     let currentCount = currentItem.querySelector('.cart-item-count');
                     currentCount.textContent = Number(currentCount.textContent) + 1;
                     
-                    // Обновление количества товара в объекте cart
+                        // Обновление количества товара в объекте cart
                     cart[productsFromJSON[product].name].quantity++;
                     
                     found = true;
@@ -86,7 +86,7 @@ function addToCartFunction(serviceItem, product) {
             }
         }
 
-        // Если товар не найден, добавляем его в DOM и в объект cart
+            // Если товар не найден, добавляем его в DOM и в объект cart
         if (!found) { 
             templateClone.querySelector('.cart-item-name').textContent = productsFromJSON[product].name;
             templateClone.querySelector('.cart-item-price').textContent = productsFromJSON[product].price;
@@ -98,13 +98,11 @@ function addToCartFunction(serviceItem, product) {
             addControlButtonEvents(incButton, decButton);
             cartItemList.appendChild(templateClone);
 
-            // Добавление нового товара в объект cart
-00:15
-
-
-cart[productsFromJSON[product].name] = {
+                // Добавление нового товара в объект cart
+            cart[productsFromJSON[product].name] = {
                 price: productsFromJSON[product].price,
-                quantity: 1
+                quantity: 1,
+                photo: `api/${productsFromJSON[product].photo}`
             };
         }
 
@@ -144,7 +142,7 @@ function addControlButtonEvents(incButton, decButton) {
         const quantityInput = cartItem.querySelector('.cart-item-count');
         quantityInput.textContent = Number(quantityInput.textContent) + 1;
 
-        // Обновляем количество в объекте cart
+            // Обновляем количество в объекте cart
         cart[itemName].quantity++;
         saveCart(); 
 
