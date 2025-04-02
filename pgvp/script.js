@@ -1,10 +1,27 @@
-const jsonData = `[
-    { "name": "Услуга 1", "price": 150, "photo": "img/services/1.png", "description": "Описание услуги 3" },
-    { "name": "Услуга 2", "price": 250, "photo": "img/services/1.png", "description": "Описание услуги 2" },
-    { "name": "Услуга 3", "price": 350, "photo": "img/services/1.png", "description": "Описание услуги 3" }
-]`;
+let productsFromJSON = []; // Создаём переменную для хранения данных
 
-let productsFromJSON = JSON.parse(jsonData)
+fetch('http://gexpc.ru/api/services')
+  .then(response => {
+    if (!response.ok) throw new Error('Ошибка сети');
+    return response.json();
+  })
+  .then(data => {
+    console.log('Получены данные:', data);
+    productsFromJSON = data; // Заполняем переменную данными
+        // Здесь можно вызывать функции для работы с данными
+    renderProducts(productsFromJSON);
+    renderServices();
+  })
+  .catch(error => {
+    console.error('Произошла ошибка:', error);
+  });
+
+    // Функция для работы с полученными данными
+function renderProducts(products) {
+  console.log('Товары для отображения:', products);
+}
+
+console.log(productsFromJSON);
 
 let servicesList = document.querySelector('.services__list');
 let productTemplate = document.getElementById('service-item');
@@ -19,16 +36,20 @@ function renderServices() {
         
         serviceItem.querySelector('.services__item-price').textContent = productsFromJSON[product].price;
         serviceItem.querySelector('.services__item-name').textContent = productsFromJSON[product].name;
-        serviceItem.querySelector('.services__item-desc').textContent = productsFromJSON[product].description;
-        serviceItem.querySelector('img').setAttribute('src', productsFromJSON[product].photo);
+
+        for (let descItem in productsFromJSON[product].description) {
+            let newElement = document.createElement('li');
+            newElement.textContent = productsFromJSON[product].description[descItem];
+            serviceItem.querySelector('.services__item-desc').appendChild(newElement);
+        }
+
+        serviceItem.querySelector('img').setAttribute('src', `api/${ productsFromJSON[product].photo}`);
 
         addToCartFunction(serviceItem, product);
 
         servicesList.appendChild(serviceItem);
     }
 }
-
-renderServices();
 
 // Переменные с DOM-объектами;
 let cartButton = document.querySelector('.button__cart'); // Кнопка открытия корзины
@@ -38,7 +59,6 @@ let cartPrice = document.querySelector('.cart-price'); // Общая стоим�
 let cartClearButton = document.querySelector('.cart-clear-button'); // Кнопка очистки корзины
 
 cartItemList.innerHTML = '';
-
 
 let cart = JSON.parse(localStorage.getItem('cart')) || {};
 
@@ -63,7 +83,7 @@ function addToCartFunction(serviceItem, product) {
                     let currentCount = currentItem.querySelector('.cart-item-count');
                     currentCount.textContent = Number(currentCount.textContent) + 1;
                     
-                    // Обновление количества товара в объекте cart
+                        // Обновление количества товара в объекте cart
                     cart[productsFromJSON[product].name].quantity++;
                     
                     found = true;
@@ -72,10 +92,11 @@ function addToCartFunction(serviceItem, product) {
             }
         }
 
-        // Если товар не найден, добавляем его в DOM и в объект cart
+            // Если товар не найден, добавляем его в DOM и в объект cart
         if (!found) { 
             templateClone.querySelector('.cart-item-name').textContent = productsFromJSON[product].name;
             templateClone.querySelector('.cart-item-price').textContent = productsFromJSON[product].price;
+            templateClone.querySelector('img').setAttribute('src', `api/${ productsFromJSON[product].photo}`);
 
             let incButton = templateClone.querySelector('.increase-cart-item');
             let decButton = templateClone.querySelector('.decrease-cart-item');
@@ -83,10 +104,11 @@ function addToCartFunction(serviceItem, product) {
             addControlButtonEvents(incButton, decButton);
             cartItemList.appendChild(templateClone);
 
-            // Добавление нового товара в объект cart
+                // Добавление нового товара в объект cart
             cart[productsFromJSON[product].name] = {
                 price: productsFromJSON[product].price,
-                quantity: 1
+                quantity: 1,
+                photo: `api/${ productsFromJSON[product].photo}`
             };
         }
 
@@ -126,7 +148,7 @@ function addControlButtonEvents(incButton, decButton) {
         const quantityInput = cartItem.querySelector('.cart-item-count');
         quantityInput.textContent = Number(quantityInput.textContent) + 1;
 
-        // Обновляем количество в объекте cart
+            // Обновляем количество в объекте cart
         cart[itemName].quantity++;
         saveCart(); 
 

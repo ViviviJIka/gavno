@@ -1,11 +1,16 @@
 :root {
-    --color-main: #003366;
+    --color-main: #3C3C3C;
     --color-white: #FFFFFF;
     --color-black: #000;
 }
 
+@font-face {
+    font-family: 'GagalinRegular', sans-serif;
+    src: url(../pgvp/font/Gagalin-Regular.otf);
+} 
+
 * {
-    font-family: "Montserrat", sans-serif;
+    font-family: "GagalinRegular", sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -25,6 +30,7 @@ body {
     position: fixed;
     width: 100%;
     z-index: 5;
+    box-shadow: 0px 5px 10px 0px black;
 }
 
 .header__inner {
@@ -36,6 +42,11 @@ body {
 
     color: var(--color-white);
     font-size: 18px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
 }
 
 .header__cart {
@@ -263,11 +274,12 @@ body {
 .banner {
     /* background-image: url(img/title.jpg);
     background-repeat: no-repeat; */
-
-    padding-top: 70px;
+    
+    padding-top: 100px;
     background-size: 100% 100%;
 
     background-color: rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 3px 20px 0px black;
 }
 
 .banner__inner {
@@ -374,6 +386,12 @@ body {
     height: 100px;
 }
 
+.services__item-desc {
+    font-size: 18px;
+    margin-left: 30px;
+    list-style: disc;
+}
+
 .services__item-cart {
     border: none;
 }
@@ -415,6 +433,7 @@ body {
 
     .services__item {
         max-width: 80%;
+        min-width: 50%;
         margin: 0 auto;
     }
 
