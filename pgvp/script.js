@@ -125,6 +125,7 @@ function loadCart() {
         templateClone.querySelector('.cart-item-name').textContent = product;
         templateClone.querySelector('.cart-item-price').textContent = cart[product].price;
         templateClone.querySelector('.cart-item-count').textContent = cart[product].quantity;
+        templateClone.querySelector('img').setAttribute('src', cart[product].photo);
     
         let incButton = templateClone.querySelector('.increase-cart-item');
         let decButton = templateClone.querySelector('.decrease-cart-item');
