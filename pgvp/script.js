@@ -1,6 +1,6 @@
 let productsFromJSON = []; // Создаём переменную для хранения данных
 
-fetch('http://gexpc.ru/api/services')
+fetch('https://gexpc.ru/api/services')
   .then(response => {
     if (!response.ok) throw new Error('Ошибка сети');
     return response.json();
